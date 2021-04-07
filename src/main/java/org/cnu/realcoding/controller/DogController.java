@@ -32,14 +32,29 @@ public class DogController {
         dogManagementService.plusRecord(name, ownerName, ownerPhoneNumber, newRecord);
     }
 
-    @GetMapping("/dogs/{name}")
+    @GetMapping("/dogs")
+    public List<Dog> getAllDogs() {
+        return dogManagementService.getAllDogs();
+    }
+
+    @GetMapping("/dog/{name}")
     public Dog getDogByName(@PathVariable String name) {
         return dogManagementService.getDogByName(name);
     }
 
-    @GetMapping("/dogs")
-    public List<Dog> getAllDogs() {
-        return dogManagementService.getAllDogs();
+    @GetMapping("/dog/ownerName/{ownerName}")
+    public Dog getDogByOwnerName(@PathVariable String ownerName) {
+        return dogManagementService.getDogByOwnerName(ownerName);
+    }
+
+    @GetMapping("/dog/ownerPhoneNumber/{ownerPhoneNumber}")
+    public Dog getDogByOwnerPhoneNumber (@PathVariable String ownerPhoneNumber) {
+        return dogManagementService.getDogByOwnerPhoneNumber (ownerPhoneNumber);
+    }
+
+    @GetMapping("/dog/{name}/{ownerName}/{ownerPhoneNumber}")
+    public Dog getDogAllInfo (@PathVariable String name, String ownerName, String ownerPhoneNumber) {
+        return dogManagementService.getDogAllInfo (name, ownerName, ownerPhoneNumber);
     }
 
 

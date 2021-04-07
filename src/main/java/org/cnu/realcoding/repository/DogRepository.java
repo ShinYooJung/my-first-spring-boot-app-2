@@ -79,12 +79,22 @@ public class DogRepository {
         mongoTemplate.insert(dog);
     }
 
-    public Dog findDog(String name) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("name").is(name)), Dog.class);
+    public Dog findDogByName(String name) {
+        return mongoTemplate.findOne(Query.query(Criteria.where("name").is(name)),Dog.class);
+    }
+
+    public Dog findDogByOwnerName(String OwnerName) {
+        return mongoTemplate.findOne(Query.query(Criteria.where("ownerName").is(OwnerName)),Dog.class);
+    }
+
+    public Dog findDogByOwnerPhoneNumber(String OwnerPhoneNumber) {
+        return mongoTemplate.findOne(Query.query(Criteria.where("ownerPhoneNumber").is(OwnerPhoneNumber)),Dog.class);
+    }
+    public Dog findDogByAllInfo(String name, String Ownername, String OwnerPhoneNumber) {
+        return mongoTemplate.findOne(Query.query(Criteria.where("name").is(name).and("ownerName").is(Ownername).and("ownerPhoneNumber").is(OwnerPhoneNumber)), Dog.class);
     }
 
     public List<Dog> findAllDog() {
         return mongoTemplate.findAll(Dog.class);
     }
-
 }
