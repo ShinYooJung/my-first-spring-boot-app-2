@@ -18,18 +18,29 @@ public class DogController {
         dogManagementService.insertDog(dog);
     }
 
-    @PutMapping("/dogs/{name}/{ownerName}/{ownerPhoneNumber}/{cName}/{cKind}/{cOwnerName}/{cOwnerPhoneNumber}")
-    public void updateAllDog(@PathVariable String name, String ownerName, String ownerPhoneNumber, String cName, String cKind, String cOwnerName, String cOwnerPhoneNumber) {
-        dogManagementService.updateAllDog(name, ownerName, ownerPhoneNumber, cName, cKind, cOwnerName, cOwnerPhoneNumber);
+    @PutMapping("/dogs/{oldName}/{oldOwnerName}/{oldOwnerPhoneNumber}")
+    public void updateAllDogs(@RequestBody Dog newDog, @PathVariable String oldName, String oldOwnerName, String oldOwnerPhoneNumber) {
+        dogManagementService.updateAllDogs(newDog, oldName, oldOwnerName, oldOwnerPhoneNumber);
     }
-    @PatchMapping("/dogs/{name}/{ownerName}/{ownerPhoneNumber}/{cKind}")
-    public void updateDog(@PathVariable String name, String ownerName, String ownerPhoneNumber, String cKind) {
-        dogManagementService.updateDog(name, ownerName, ownerPhoneNumber, cKind);
+    @PatchMapping("/dogs/{name}/{ownerName}/{ownerPhoneNumber}/{newKind}")
+    public void updateDog(@PathVariable String name, String ownerName, String ownerPhoneNumber, String newKind) {
+        dogManagementService.updateDog(name, ownerName, ownerPhoneNumber, newKind);
     }
 
-    @PostMapping("/dogs/{name}/{ownerName}/{ownerPhoneNumber}/{record}")
-    public void plusMedicalRecord(@PathVariable String name, String ownerName, String ownerPhoneNumber, String record) {
-        dogManagementService.plusRecord(name, ownerName, ownerPhoneNumber, record);
+    @PostMapping("/dogs/{name}/{ownerName}/{ownerPhoneNumber}/{newRecord}")
+    public void plusMedicalRecord(@PathVariable String name, String ownerName, String ownerPhoneNumber, String newRecord) {
+        dogManagementService.plusRecord(name, ownerName, ownerPhoneNumber, newRecord);
     }
+
+    @GetMapping("/dogs/{name}")
+    public Dog getDogByName(@PathVariable String name) {
+        return dogManagementService.getDogByName(name);
+    }
+
+    @GetMapping("/dogs")
+    public List<Dog> getAllDogs() {
+        return dogManagementService.getAllDogs();
+    }
+
 
 }
