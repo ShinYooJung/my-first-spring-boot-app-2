@@ -28,12 +28,12 @@ public class DogController {
         return dogManagementService.getDogByName(name);
     }
 
-    @GetMapping("/dog/{ownerName}")
+    @GetMapping("/dog/ownerName/{ownerName}")
     public Dog getDogByOwnerName(@PathVariable String ownerName) {
         return dogManagementService.getDogByOwnerName(ownerName);
     }
 
-    @GetMapping("/dog/{ownerPhoneNumber}")
+    @GetMapping("/dog/ownerPhoneNumber/{ownerPhoneNumber}")
     public Dog getDogByOwnerPhoneNumber (@PathVariable String ownerPhoneNumber) {
         return dogManagementService.getDogByOwnerPhoneNumber (ownerPhoneNumber);
     }
