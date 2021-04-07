@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -28,21 +30,6 @@ public class DogRepository {
         }
         mongoTemplate.insert(dog);
     }
-
-
-    public Dog findDogByName(String name) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("name").is(name)),Dog.class);
-    }
-
-    public Dog findDogByOwnerName(String OwnerName) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("ownerName").is(OwnerName)),Dog.class);
-    }
-
-    public Dog findDogByOwnerPhoneNumber(String OwnerPhoneNumber) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("ownerPhoneNumber").is(OwnerPhoneNumber)),Dog.class);
-    }
-    public Dog findDogByAllInfo(String name, String Ownername, String OwnerPhoneNumber) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("name").is(name).and("ownerName").is(Ownername).and("ownerPhoneNumber").is(OwnerPhoneNumber)), Dog.class);
 
     public void updateAllDogs(Dog newDog, String oldName, String oldOwnerName, String oldOwnerPhoneNumber) {
         Criteria criteria = Criteria.where("name").is(oldName).and("ownerName").is(oldOwnerName).and("ownerPhoneNumber").is(oldOwnerPhoneNumber);
@@ -90,6 +77,10 @@ public class DogRepository {
         list.add(newRecord);
         dog.setMedicalRecords(list);
         mongoTemplate.insert(dog);
+    }
+
+    public Dog findDog(String name) {
+        return mongoTemplate.findOne(Query.query(Criteria.where("name").is(name)), Dog.class);
     }
 
     public List<Dog> findAllDog() {
